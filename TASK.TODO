@@ -1,0 +1,82 @@
+Dear Razi,
+Greetings from Human Capital Group !
+
+In reference with your today’s interview, you have been assigned for the technical test which has to submitted by Wednesday at 10:00 AM. Below are the test details for your reference.
+
+Language: Javascript
+Database: Couchdb 2.1
+
+ Create a library single page application using any Javascript framework (vuejs*, knockoutjs, angularjs) and Couchdb 2.1
+
+------------------------------------------------------------------------------------------------------------------------
+
+Features:
+
+ ☐ Login
+ ☐ Registration (only for readers)
+ ☐ Librarian portal
+ ☐ Admin portal
+ ☐ Reader Portal
+
+ 
+
+There are 3 types of users: Admin, Librarian & Reader
+Admin: General web app admin
+- Create/Activate/Deactivate users (Librarians and Readers)
+- Add and manage user roles
+- Can do everything librarian can do 
+
+Librarian: Library admin
+- Perform CRUD operations on books
+- Search books
+- Assign books to registered users
+ 
+Reader: Person who is interested in reading and checking out books from the library
+
+- Search library database
+- Checkout/Return books
+- Rate/Comment on books 
+
+Auto Increment ID's
+----------------------------
+
+There should be an auto increment ID for the user and book ids the formula for the ID format is as follows:
+
+- Books ({Category}-{ISBN})
+- User ({username}-{Auto increment number max 5 digits}) 
+
+Book should have:
+
+ID
+Name
+Genre/Category
+Author
+Publish Date
+ 
+User should have:
+ID
+First Name
+Last Name
+Email
+Phone
+
+***the User ID will be used to login to the website***
+
+Note:  you can submit the technical if you complete before mentioned time and we will arrange a meeting for presentation.
+
+Kindly revert back for the  confirmation.
+
+If you have any queries, please do not hesitate to contact me.
+Regards,
+
+Ms Sadaf Jabeen
+HR & Recruitment Admin
+M:   +974 31375833
+T:    +974 4437 4564
+F:    +974 4437 4556
+E:    Sadaf@hcg.com.qa
+W:   www.hcg.com.qa
+
+Human Capital Group WLL
+isp
+This message may contain confidential information. If you are not the intended recipient, please notify the sender immediately and delete this email from your system.
