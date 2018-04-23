@@ -1,32 +1,31 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
+import Vuex from 'vuex'
 import App from './App'
 import router from './router'
-
-// import VueFire from 'vuefire'
-// import firebase from 'firebase/app'
-// import 'firebase/firestore'
-// Vue.use(VueFire)
-// require('bootstrap')
-// var PouchDB = require('pouchdb')
 import PouchDB from 'pouchdb'
 import PouchDBFind from 'pouchdb-find'
-PouchDB.plugin(PouchDBFind);
-export const db = new PouchDB('http://localhost:5984/library')
-// firebase.initializeApp({
-//   projectId: 'firestarter-96e46',
-//   databaseURL: 'https://firestarter-96e46.firebaseio.com'
-// })
+import PouchDBAuth from 'pouchdb-authentication'
+import {store} from  './store/store';
 
-// export const db = firebase.firestore()
+PouchDB.plugin(PouchDBFind);
+PouchDB.plugin(PouchDBAuth);
+export const db = new PouchDB('http://localhost:5984/library',{skip_setup: true});
+export const usersDB = new PouchDB('http://localhost:5984/_users',{skip_setup: true});
 
 Vue.config.productionTip = false
+
+// db.changes().on('change', function() {
+// 	console.log("db:changes")
+//   store.dispatch('isAuthenticated')
+// });
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

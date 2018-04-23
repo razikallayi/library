@@ -1,35 +1,71 @@
 <template>
-	<tr>
-		<td>{{book._id}}</td>
-		<td>{{book.name}}</td>
-		<td>{{book.category}}</td>
-		<td>{{book.author}}</td>
-		<td>{{book.published_date}}</td>
-		<td><button class="btn btn-sm btn-danger" v-on:click="$emit('remove')">X</button></td>
-	</tr>
+	<div class="item card" @click="viewDetails">
+		<div class="content">
+			<div class="row">
+				<div class="col-xs-3">
+					<div class="icon-big icon-warning text-center">
+						<i class="ti-book"></i>
+						<p>{{new Date(book.published_date).getFullYear()}}</p>
+					</div>
+				</div>
+				<div class="col-xs-9">
+					<div class="numbers">
+						<h6 class="lead">{{book.author}}</h6>
+						<p>{{book.name.substring(0,200)}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
+				<hr>
+				<star-rating :rating="averageRating" :star-size="20" :show-rating="false" :read-only="true"></star-rating>
+				<small class="pull-right text-primary">{{book.category}}</small>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
+import StarRating from 'vue-star-rating'
 export default {
-	data () {
-		return {book:
-			{
-				_id: 1,
-				name: 'Do the dishes',
-				category: 'science',
-				author: 'habbeb',
-				published_date: '12/12/2012',
-			}
+	name: 'BookItem',
+	props:{book:{}},
+	data(){
+		return{
+			rating:0
 		}
 	},
-	methods: {
-		addNewTodo: function () {
-			this.todos.push({
-				id: this.nextTodoId++,
-				title: this.newTodoText
-			})
-			this.newTodoText = ''
+	components:{
+		StarRating
+	},
+	mounted(){
+		// this.averageRating()
+	},
+	computed:{
+		averageRating(){
+			let comments = this.book.comments;
+			if(comments && comments.length>0){
+				var itemRating=0;
+				comments.forEach((item)=> {
+					itemRating += item.rating
+				})
+				this.rating= itemRating/comments.length
+			}
+			return this.rating
 		}
+	},
+	methods:{
+		viewDetails(){
+			this.$router.push({ name: 'book_details', params: { id: this.book._id }})
+		},
 	}
 }
 </script>
+<style>
+.item{
+	cursor:pointer;
+	transition: all .4s ease-in-out;
+}
+.item:hover{
+	transform: scale(1.1);
+}
+</style>

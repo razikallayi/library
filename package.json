@@ -14,9 +14,13 @@
     "bootstrap": "^4.1.0",
     "popper.js": "^1.14.3",
     "pouchdb": "^6.4.3",
+    "pouchdb-authentication": "^1.1.2",
     "pouchdb-find": "^6.4.3",
     "vue": "^2.5.13",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-star-rating": "^1.5.1",
+    "vuejs-datepicker": "^0.9.29",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

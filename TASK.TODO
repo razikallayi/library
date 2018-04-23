@@ -12,13 +12,11 @@ Database: Couchdb 2.1
 
 Features:
 
- ☐ Login
- ☐ Registration (only for readers)
- ☐ Librarian portal
- ☐ Admin portal
- ☐ Reader Portal
-
- 
+ ✔ Login @done (18-04-22 13:05)
+ ✔ Registration (only for readers) @done (18-04-22 13:05)
+ ✔ Librarian portal @done (18-04-23 20:04)
+ ✔ Admin portal @done (18-04-23 20:04)
+ ✔ Reader Portal @done (18-04-23 20:04)
 
 There are 3 types of users: Admin, Librarian & Reader
 Admin: General web app admin
@@ -27,15 +25,15 @@ Admin: General web app admin
 - Can do everything librarian can do 
 
 Librarian: Library admin
-- Perform CRUD operations on books
-- Search books
+✔ Perform CRUD operations on books @done (18-04-22 20:31)
+✔ Search books @done (18-04-22 20:31)
 - Assign books to registered users
  
 Reader: Person who is interested in reading and checking out books from the library
 
-- Search library database
+✔ Search library database @done (18-04-22 20:31)
 - Checkout/Return books
-- Rate/Comment on books 
+✔ Rate/Comment on books @done (18-04-22 20:31)
 
 Auto Increment ID's
 ----------------------------

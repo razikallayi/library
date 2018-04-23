@@ -1,29 +1,18 @@
 <template>
-    <footer class="footer">
-        <div class="container-fluid">
-            <nav class="pull-left">
-                <ul>
-
-                    <li>
-                        <a href="http://www.creative-tim.com">
-                            Creative Tim
-                        </a>
-                    </li>
-                    <li>
-                        <a href="http://blog.creative-tim.com">
-                         Blog
-                     </a>
-                 </li>
-                 <li>
-                    <a href="http://www.creative-tim.com/license">
-                        Licenses
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <div class="copyright pull-right">
-            &copy; 2018, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
-        </div>
-    </div>
-</footer>
+	<footer class="footer">
+		<div class="container-fluid">
+			<div class="copyright pull-right">
+				&copy; 2018, Made with <i class="ti-heart heart"></i> by <a href="http://www.razikallayi.com">Razi</a> 
+			</div>
+		</div>
+	</footer>
 </template>
+<style scoped>
+	.footer .copyright{
+		margin:auto;
+		/*color:#EEE;*/
+	}
+	.heart{
+		font-size: 11px;
+	}
+</style>
