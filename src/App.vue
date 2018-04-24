@@ -68,9 +68,9 @@ export default {
           if (!response.userCtx.name) {
             menuItems = vue.noAuthMenuItems;
           } else {
-            var userRole = response.userCtx.roles[0];
+            var userRole = response.userCtx.roles[0]==undefined?'reader':response.userCtx.roles[0];
             var roleCheck =  vue.authMenuItems.forEach((menuItem)=>{
-              var check = menuItem.roles.some((auth,a,b)=>{
+              var check = menuItem.roles.some((auth)=>{
                 return auth===userRole
               })
               if(check){

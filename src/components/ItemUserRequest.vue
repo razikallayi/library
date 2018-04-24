@@ -17,7 +17,7 @@
 			<div class="header">
 				<div class="row">
 					<div class="col-xs-12">
-						<button class="btn btn-block btn-info" @click="activateUser(user._id)">Activate</button>
+						<button class="btn btn-block btn-xs btn-info" @click="activateUser(user._id)">Activate</button>
 					</div>
 				</div>
 			</div>
@@ -41,9 +41,10 @@ export default {
 			var vue = this
 			return usersDB.get(id).then(function(doc){
 				doc.active = activeStatus
-				vue.$emit('userStatusChanged')
 				return usersDB.put(doc)
-			})
+			}).then(function(){
+				vue.$emit('userStatusChanged')
+			}).catch(console.log.bind(console));
 		},
 		viewUsers(){
 			this.$router.push({ name: 'users'})

@@ -158,11 +158,7 @@ export default {
         result.rows.forEach((row)=>{
           if(row.id.startsWith("org.couchdb.user")){
             var user = row.doc
-            if(row.doc.roles.length ==0){
-              user.role = 'reader'
-            }else{
-              user.role = row.doc.roles[0]
-            }
+            user.role = row.doc.roles[0]==undefined?'reader':row.doc.roles[0]
             return vue.users.push(user)
           }
         })

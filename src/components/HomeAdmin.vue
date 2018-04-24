@@ -38,7 +38,7 @@ export default {
 				return Promise.all(result.rows.map(function (row) {
 					if(row.id.startsWith("org.couchdb.user")){
 						var user = row.doc;
-						user.role = row.doc.roles.length==0?'reader':row.doc.roles[0]
+						user.role = row.doc.roles[0]==undefined?'reader':row.doc.roles[0]
 						if(!user.active){
 							vue.users.push(user)
 						}

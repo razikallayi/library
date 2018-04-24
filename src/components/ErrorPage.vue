@@ -14,8 +14,8 @@ export default {
 	},
 	mounted(){
 		this.$nextTick(function () {
-			// this.$store.dispatch('setSidebar', false)
-			this.$store.dispatch('setTopnav', false)
+			this.$store.dispatch('setSidebar', true)
+			this.$store.dispatch('setTopnav', true)
 		})
 	},
 	computed:{

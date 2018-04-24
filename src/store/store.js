@@ -28,12 +28,16 @@ export const store = new Vuex.Store({
   },
   actions: {
     userSignUp ({commit}, payload) {
-      var userData = payload
-      userData.roles=[]
-      userData.name=payload.username
-      userData._id= "org.couchdb.user:"+payload.username
-      userData.type= "user"
-      usersDB.put(userData).then((response)=> {
+      var userData = Object.assign({},payload)
+      // userData.roles=[]
+      // delete userData.password
+      // delete userData.type
+      // delete userData.roles
+      // delete userData.name
+      // delete userData._id
+      // db.signUp(payload.username, payload.password,{metadata:userData})
+      usersDB.put(userData)
+      .then((response)=> {
         $.notify("Registration successfull.")
         router.push('/home')
       }).catch((err)=>{

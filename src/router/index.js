@@ -82,7 +82,7 @@ router.beforeEach((to, from, next) => {
       } else {
 
         var user={};
-        user.role = response.userCtx.roles[0];
+        user.role = response.userCtx.roles[0]==undefined?'reader':response.userCtx.roles[0];
         user.name = response.userCtx.name;
         if(user.role!=="_admin"){
           db.getUser(response.userCtx.name, function (err, response) {

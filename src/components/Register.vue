@@ -85,6 +85,9 @@ export default {
 				role : "reader",
 				active : false,
 				type:'user',
+				name:this.username,
+				_id: "org.couchdb.user:"+this.username,
+				type: "user"
 			})
 
 		},
