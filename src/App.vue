@@ -59,7 +59,7 @@ export default {
       var menuItems=[];
       if(requiresAuth) {
         var ajaxData ={
-         url: 'http://localhost:5984/_session',
+         url: 'http://139.59.82.18:5984/_session',
          async:false,
          xhrFields: {
           withCredentials: true

@@ -6,7 +6,7 @@
 			</div>
 		</div>
 		<div class="col-md-3" v-for="(user,index) in users" :key="user._id">
-			<item-user-request :user="user" :userStatusChanged="getUsers()"></item-user-request>
+			<item-user-request :user="user" @userStatusChanged="getUsers()"></item-user-request>
 		</div>
 	</div>
 </template>
@@ -32,24 +32,19 @@ export default {
 	methods: {
 		getUsers () { 
 			var vue =this;
-			return usersDB.allDocs({"include_docs": true}).then(function(result){
-				vue.users=[]
-				result.rows.forEach((row)=>{
+			vue.users=[]
+			return usersDB.allDocs({"include_docs": true})
+			.then(function(result){
+				return Promise.all(result.rows.map(function (row) {
 					if(row.id.startsWith("org.couchdb.user")){
-						var user = row.doc
-						if(row.doc.roles.length ==0){
-							user.role = 'reader'
-						}else{
-							user.role = row.doc.roles[0]
-						}
+						var user = row.doc;
+						user.role = row.doc.roles.length==0?'reader':row.doc.roles[0]
 						if(!user.active){
-							return vue.users.push(user)
+							vue.users.push(user)
 						}
 					}
-				})
-			}).catch((error)=>{
-				
-			})
+				}))
+			}).catch(console.log.bind(console));
 		},
 	}
 }

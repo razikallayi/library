@@ -60,7 +60,7 @@ export default {
 	}
 }
 </script>
-<style>
+<style scoped>
 .item{
 	cursor:pointer;
 	transition: all .3s ease-in-out;

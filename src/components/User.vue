@@ -47,7 +47,7 @@
             </div>
           </div>
 
-          <div class="form-group col-xs-12">
+          <div class="col-xs-12">
             <input id="active" type="checkbox" v-model="user.active">
             <label for="active">Active</label>
           </div>
@@ -120,9 +120,6 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 </template>
 
@@ -341,4 +338,10 @@ a {
 input, button {
   margin-bottom: 10px;
 }
+
+input[type="checkbox"],input[type="radio"]{
+  transform: scale(2);
+  margin: 5px;
+}
+
 </style>

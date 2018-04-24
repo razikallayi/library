@@ -39,7 +39,7 @@ let router = new Router({
   },
   {
     path: '/users',
-    name: 'user',
+    name: 'users',
     component: User,
     meta: { requiresAuth: true , roles:['_admin']}
   },

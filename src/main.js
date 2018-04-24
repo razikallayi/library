@@ -11,8 +11,8 @@ import {store} from  './store/store';
 
 PouchDB.plugin(PouchDBFind);
 PouchDB.plugin(PouchDBAuth);
-export const db = new PouchDB('http://localhost:5984/library',{skip_setup: true});
-export const usersDB = new PouchDB('http://localhost:5984/_users',{skip_setup: true});
+export const db = new PouchDB('http://139.59.82.18:5984/library',{skip_setup: true});
+export const usersDB = new PouchDB('http://139.59.82.18:5984/_users',{skip_setup: true});
 
 Vue.config.productionTip = false
 

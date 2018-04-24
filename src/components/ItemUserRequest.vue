@@ -1,10 +1,10 @@
 <template>
-	<div class="card">
+	<div class="card" :id="'user-'+user._id" v-if="!user.active">
 		<div class="content">
-			<div class="row">
+			<div class="row item" @click="viewUsers()">
 				<div class="col-xs-3">
-					<div class="icon-big icon-primary text-center">
-						<i class="ti-face-smile"></i>
+					<div class="icon-big icon-success text-center">
+						<i class="ti-user"></i>
 					</div>
 				</div>
 				<div class="col-xs-9">
@@ -17,9 +17,7 @@
 			<div class="header">
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="col-xs-6">
-							<button class="btn btn-fill btn-primary btn-wd" @click="activateUser(user._id)">Activate</button>
-						</div>
+						<button class="btn btn-block btn-info" @click="activateUser(user._id)">Activate</button>
 					</div>
 				</div>
 			</div>
@@ -47,21 +45,18 @@ export default {
 				return usersDB.put(doc)
 			})
 		},
+		viewUsers(){
+			this.$router.push({ name: 'users'})
+		},
 	}
 }
 </script>
-<style>
+<style scoped>
 .item{
 	cursor:pointer;
 	transition: all .3s ease-in-out;
 }
-
-.item:hover{
-	/*transform: scale(1.01);*/
-	box-shadow: 0px 3px 16px rgba(20, 0, 0, 0.5);
-}
 .item:active,.item:focus{
 	transform: scale(0.3);
-	box-shadow: 0 2px 2px rgba(20, 0, 0, 0.5);
 }
 </style>

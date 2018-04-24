@@ -45,11 +45,11 @@ export default{
             if(this.$store.state.user.role ==='librarian')
                 return 'linear-gradient(to top, #f8844f, #6c165a)'
             return 'linear-gradient(to top, #f84f4f,  #6c1630)'
-      }
-  },
+        }
+    },
 
-  methods:{
-    toggleSidebar(){
+    methods:{
+        toggleSidebar(){
        // this.sidebar = !this.$store.state.sidebar
        this.$store.dispatch('setSidebar',!this.$store.state.sidebar)
    }
@@ -76,13 +76,4 @@ export default{
     font-size: 12px;
     color: #CCC
 }
-/*.sidebar-wrapper{*/
-    /*background-image: linear-gradient(to bottom, #6c1630,  #ee9053);*/
-    /*background-image: linear-gradient(to bottom, #FFF,  #EEE);*/
-    /*background-image: linear-gradient(to top, #f84f4f,  #6c1630);*/
-    /*background: url('../../../static/img/banner.jpg');*/
-    /*background:#FFF;*/
-    /*background:rgba(0,0,0,0.4);*/
-    /*background:#772036;*/
-    /*}*/
-    </style>
+</style>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '@/router'
 import { db } from '../main'
+import { usersDB } from '../main'
 import PouchDB from 'pouchdb'
 
 Vue.use(Vuex)
@@ -27,7 +28,6 @@ export const store = new Vuex.Store({
   },
   actions: {
     userSignUp ({commit}, payload) {
-      var usersDB = new PouchDB('http://localhost:5984/_users',{skip_setup: true})
       var userData = payload
       userData.roles=[]
       userData.name=payload.username
@@ -54,10 +54,10 @@ export const store = new Vuex.Store({
         let status='danger'
         if (error.name === 'unauthorized' || error.name === 'forbidden') {
           let message = "Incorrect username or password";
-          $.notify({message:err.message},{type:status})
+          $.notify({message:error.message},{type:status})
         } else {
           let message = error;
-          $.notify({message:err.message},{type:status})
+          $.notify({message:error.message},{type:status})
         }
       })
     },

@@ -6,7 +6,7 @@
 			</div>
 			<div class="content">
 				<div class="author">
-					<img class="avatar border-white" src="static/img/face.jpg">
+					<img class="avatar border-white" src="static/img/book.png">
 					<h5 class="text-center">Register</h5>
 					<router-link to="/login" >
 						<h5>Already have an account? Login Here!</h5>
