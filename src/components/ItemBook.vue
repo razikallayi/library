@@ -17,7 +17,7 @@
 			</div>
 			<div class="footer">
 				<hr>
-				<star-rating :rating="averageRating" :star-size="20" :show-rating="false" :read-only="true"></star-rating>
+				<star-rating :rating="averageRating" :star-size="15" :show-rating="false" :read-only="true"></star-rating>
 				<small class="pull-right text-primary">{{book.category}}</small>
 			</div>
 		</div>
@@ -27,7 +27,7 @@
 <script>
 import StarRating from 'vue-star-rating'
 export default {
-	name: 'BookItem',
+	name: 'ItemBook',
 	props:{book:{}},
 	data(){
 		return{
@@ -63,9 +63,14 @@ export default {
 <style>
 .item{
 	cursor:pointer;
-	transition: all .4s ease-in-out;
+	transition: all .3s ease-in-out;
 }
 .item:hover{
-	transform: scale(1.1);
+	/*transform: scale(1.01);*/
+	box-shadow: 0px 3px 16px rgba(20, 0, 0, 0.5);
+}
+.item:active,.item:focus{
+	transform: scale(0.9);
+	box-shadow: 0 2px 2px rgba(20, 0, 0, 0.5);
 }
 </style>

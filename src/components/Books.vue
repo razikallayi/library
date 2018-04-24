@@ -69,7 +69,7 @@
               <td colspan="8" class="text-center">
                 <h3>-- No Books --</h3>
                 <button class="btn btn-sm btn-success" v-on:click="generateSamples()">Generate Sample Books</button>
-                </td>
+              </td>
             </tr>
             <tr v-for="(book,index) in books" :key="book._id">
               <td>{{index+1}}</td>
@@ -79,10 +79,13 @@
               <td>{{book.author}}</td>
               <td>{{book.published_date}}</td>
               <td>
-                <button class="btn btn-warning btn-sm" v-on:click="editBook(book._id,index)">
+                <button class="btn btn-primary btn-xs" v-on:click="viewDetails(book._id,index)">
+                  <i class="ti-eye"></i>
+                </button>
+                <button class="btn btn-warning btn-xs" v-on:click="editBook(book._id,index)">
                   <i class="ti-pencil"></i>
                 </button>
-                <button class="btn btn-danger btn-sm" v-on:click="deleteBook(book._id,index)">
+                <button class="btn btn-danger btn-xs" v-on:click="deleteBook(book._id,index)">
                   <i class="ti-close"></i>
                 </button>
               </td>
@@ -105,7 +108,7 @@ import SampleBooks  from './data/SampleBooks'
 import Datepicker from 'vuejs-datepicker';
 export default {
   components: {
-      Datepicker
+    Datepicker
   },
   data () {
     return {
@@ -125,40 +128,14 @@ export default {
   mounted() {
     this.$nextTick(function () {
       this.getBooks ()
-      var vue = this
-      db.getSession(function(err,response) {
-        console.log(err,response)
-        console.log(response.userCtx.name)
-        if(!response.userCtx.name){
-          console.log("err,response")
-          vue.$router.replace('login')
-        }
-        // db.getUser(response.userCtx.name).then((response)=>{
-        //   console.log('2')
-        //   console.log(response)
-        // })
-      }).catch((err)=> {
-        console.log('3')
-        var message='';
-        var status='danger';
-        if (err) {
-          message= "network error"
-          $.notify({message:message},{type:status})
-        } else if (!err.userCtx.name) {
-          this.$router.replace('login')
-        } else {
-          message= err.userCtx.name+" is the current user"
-          $.notify({message:message},{type:status})
-          // this.$router.replace('login')
-        }
-      });
+      this.$store.state.pageTitle="Books"
     })
-    },
+  },
   methods: {
     getBooks () { 
       var vue =this;
       
-     return db.createIndex({
+      return db.createIndex({
         index: {fields: ['type']}
       }).then(function(){
         db.find({
@@ -171,10 +148,6 @@ export default {
           return vue.books = result.docs
         });
       })
-      // db.allDocs({include_docs: true,descending:true}).then(function(result){
-      //   vue.books = result.rows
-      //   vue.drawBookTable(result.rows);
-      // });
     },
     generateSamples () { 
       var vue =this;
@@ -207,6 +180,7 @@ export default {
     createBook(book){
       var vue = this
       return db.put(book).then((result)=>{
+        $.notify("Success")
         vue.getBooks()
         vue.clearForm()
         return result
@@ -226,6 +200,9 @@ export default {
       })
       this.button = "Add Book"
       document.getElementById('BookNameInput').focus()
+    },
+    viewDetails(bookId){
+      this.$router.push({ name: 'book_details', params: { id: bookId }})
     },
     editBook (id,index) {
       var vue =this
@@ -251,7 +228,7 @@ export default {
         db.createIndex({
           index: {fields: ['name']}
         }).then(function(){
-          query="(?i)"+query
+          query="^(?i)"+query
           db.find({
             selector: {
               type: {
@@ -284,7 +261,6 @@ export default {
             }
           }).then(function(result){
             vue.books = result.docs
-            console.log(result.docs)
           });
         })
       }

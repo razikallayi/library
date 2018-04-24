@@ -79,22 +79,33 @@ router.beforeEach((to, from, next) => {
       } else if (!response.userCtx.name) {
         next({name:'login'})
       } else {
-        console.log()
+
         var user={};
         user.role = response.userCtx.roles[0];
         user.name = response.userCtx.name;
+        if(user.role!=="_admin"){
+          db.getUser(response.userCtx.name, function (err, response) {
+            if (!err) {
+              if(!response.active){
+               store.dispatch('setUser', {})
+               var reason = "Your account is not activated. Please contact admin for suppport."
+               reason= btoa(reason)
+               next({ name: 'error', params: { message: reason }}) 
+               return response
+             }
+           }
+         });
+        }
+        
         store.dispatch('setUser', user)
+
         var roleCheck = to.meta.roles.some((auth)=>auth===user.role);
         if(roleCheck) {
-          store.state.sidebar=true
-          store.state.topnav=true
-          store.state.footer=true
           next()
         }else{
-          var reason = "You don't have permission.Please contact Admin to request access."
+          var reason = "You don't have permission. Please contact admin for support."
           reason= btoa(reason)
           next({ name: 'error', params: { message: reason }})
-          // next({name:'home'})
         }
       }
     }) 

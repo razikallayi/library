@@ -16,11 +16,6 @@ export const usersDB = new PouchDB('http://localhost:5984/_users',{skip_setup: t
 
 Vue.config.productionTip = false
 
-// db.changes().on('change', function() {
-// 	console.log("db:changes")
-//   store.dispatch('isAuthenticated')
-// });
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

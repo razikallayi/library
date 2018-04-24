@@ -8,7 +8,8 @@
                     <span class="icon-bar bar2"></span>
                     <span class="icon-bar bar3"></span>
                 </button>
-                <a @click="toggleSidebar" class="navbar-brand"><i :class="sidebar?'ti-angle-left':'ti-angle-right'"></i></a>
+                <!-- <a @click="toggleSidebar" class="navbar-brand"><i :class="sidebar?'ti-angle-left':'ti-angle-right'"></i></a> -->
+                <a @click="$router.go(-1)" class="navbar-brand"><i class="ti-arrow-left"></i></a>
                 <router-link to="/home" class="navbar-brand"><small class="text-success lead small"> {{title}}</small> </router-link>
             </div>
             <div class="collapse navbar-collapse">

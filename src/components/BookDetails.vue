@@ -19,8 +19,8 @@
 					<h4 class="title">{{book.name}}</h4>
 					<p class="category">{{book.author}}</p>
 				</div>
-				<div class="col-md-4">
-					<button class="btn btn-lg btn-block btn-fill btn-danger btn-wd" @click="checkout">Checkout</button>
+				<div v-if="$store.state.user.role ==='reader' " class="col-md-4">
+					<button class="btn btn-lg btn-block btn-fill btn-wd" :class="checkoutButton.type" @click="checkoutButton.click">{{checkoutButton.name}}</button>
 				</div>
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 						<div class="col-md-10">
 							<div class="spacing-1">
 								<span data-notify="icon" class="ti-user text-info"></span> 
-								asdasdas{{review.user}}
+								{{review.user}}
 								<star-rating :rating="review.rating" :star-size="20" :show-rating="true" :read-only="true"></star-rating>
 							</div>
 						</div>
@@ -55,12 +55,12 @@
 					<form @submit.prevent="saveComment">
 						<div class="form-group">
 							<label><b>Your rating and review: </b></label>
-							<div class="col-md-12"><star-rating v-model="comment.rating" :star-size="30"></star-rating></div>
 							<div class="col-md-12">
 								<textarea rows="7" class="form-control border-input" placeholder="Write your reviews and comments here" required v-model="comment.content"></textarea>
 							</div>
 						</div>
-						<div class="col-md-12">
+						<div class="col-md-6"><star-rating v-model="comment.rating" :star-size="30"></star-rating></div>
+						<div class="col-md-6">
 							<div class="spacing-1 pull-right">
 								<button type="submit" class="btn btn-info">Post Comment</button>
 							</div>
@@ -93,13 +93,20 @@ export default {
 	},
 	data(){
 		return {
+			checkout:{
+				// user : this.$store.state.user,
+				// book: this.book._id,
+				// approved: false,
+				// type:'checkout'
+			},
 			comment:{
 				id:'',
-				user:'',
+				user:this.$store.state.user.name,
 				rating:0,
 				content:'',
 			},
 			book:{
+				_id: '',
 				name: '',
 				category: '',
 				author: '',
@@ -118,7 +125,20 @@ export default {
 	mounted() {
 		this.$nextTick(function () {
 			this.getBook()
+			this.getCheckoutStatus()
 		})
+	},
+	computed:{
+		checkoutButton(){
+			if(this.checkout.approved == undefined){
+				return {name:"Checkout",type:"btn-danger",click:this.saveCheckout}
+			}
+			if(this.checkout.approved){
+				return {name:"Return Book",type:"btn-success",click:this.deleteCheckout}
+			}else{
+				return {name:"Cancel Request",type:"btn-info",click:this.deleteCheckout}
+			}
+		},
 	},
 	methods:{
 		saveComment(){
@@ -148,12 +168,58 @@ export default {
 				content:'',
 			}
 		},
-		checkout(){
-			console.log("clicked checkout")
+		getCheckoutStatus(){
+			var vue = this
+			db.get(this.$store.state.user.name+"-"+this.id).then((doc)=>{
+				vue.checkout={
+					approved:doc.approved,
+					book:doc.book,
+					type:doc.type,
+					user:doc.user,
+					_id:doc._id,
+				}
+			}).catch(function (err) {
+				vue.checkout={}
+			})
+		},
+		saveCheckout(checkout){
+			var bookNoComments = this.book;
+			delete bookNoComments.comments
+			let checkoutItem={
+				_id: this.$store.state.user.name+"-"+this.id,
+				user : this.$store.state.user.name,
+				book: bookNoComments,
+				approved: false,
+				type:'checkout'
+			}
+			var vue = this
+			return db.put(checkoutItem).then((result)=>{
+				$.notify({message:"Your checkout need to be approved by librarian"},{type:'warning'})
+				vue.getCheckoutStatus()
+				return result
+			}).catch((e)=>{
+			})
+		}, deleteCheckout () {
+			var vue= this;
+			let checkoutId = this.$store.state.user.name+"-"+this.id
+			db.get(checkoutId).then(function (result) {
+				db.remove(result).then(()=>{
+					if(result.approved){
+						$.notify({message:"You returned the book"},{type:'success'})
+					}else{
+						$.notify({message:"Checkout request is cancelled"},{type:'info'})
+					}
+					vue.getCheckoutStatus()
+				})
+				return result
+			}).catch(function(err){
+				console.log(err);
+			})
 		},
 		getBook(){
 			var vue = this
 			db.get(this.id).then((doc)=>{
+				vue.book._id = doc._id
 				vue.book.name = doc.name
 				vue.book.category = doc.category
 				vue.book.author = doc.author
@@ -162,6 +228,7 @@ export default {
 				vue.book._id = doc._id
 				vue.book.type = doc.type
 				vue.book.comments = doc.comments
+				vue.$store.state.pageTitle="Book Details: "+vue.book.name
 			})
 		}
 	}

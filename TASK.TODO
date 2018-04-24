@@ -8,7 +8,6 @@ Database: Couchdb 2.1
 
  Create a library single page application using any Javascript framework (vuejs*, knockoutjs, angularjs) and Couchdb 2.1
 
-------------------------------------------------------------------------------------------------------------------------
 
 Features:
 
@@ -20,19 +19,19 @@ Features:
 
 There are 3 types of users: Admin, Librarian & Reader
 Admin: General web app admin
-- Create/Activate/Deactivate users (Librarians and Readers)
-- Add and manage user roles
-- Can do everything librarian can do 
+✔ Create/Activate/Deactivate users (Librarians and Readers) @done (18-04-24 12:20)
+✔ Add and manage user roles @done (18-04-24 10:35)
+✔ Can do everything librarian can do @done (18-04-24 10:35)
 
 Librarian: Library admin
 ✔ Perform CRUD operations on books @done (18-04-22 20:31)
 ✔ Search books @done (18-04-22 20:31)
-- Assign books to registered users
+✔ Assign books to registered users @done (18-04-24 10:35)
  
 Reader: Person who is interested in reading and checking out books from the library
 
 ✔ Search library database @done (18-04-22 20:31)
-- Checkout/Return books
+✔ Checkout/Return books @done (18-04-24 10:35)
 ✔ Rate/Comment on books @done (18-04-22 20:31)
 
 Auto Increment ID's
@@ -40,8 +39,8 @@ Auto Increment ID's
 
 There should be an auto increment ID for the user and book ids the formula for the ID format is as follows:
 
-- Books ({Category}-{ISBN})
-- User ({username}-{Auto increment number max 5 digits}) 
+✔ Books ({Category}-{ISBN}) @done (18-04-24 12:21)
+✔ User ({username}-{Auto increment number max 5 digits}) @done (18-04-24 12:21)
 
 Book should have:
 
@@ -77,4 +76,4 @@ W:   www.hcg.com.qa
 
 Human Capital Group WLL
 isp
-This message may contain confidential information. If you are not the intended recipient, please notify the sender immediately and delete this email from your system.
+This message may contain confidential information. If you are not the intended recipient, please notify the sender immediately and delete this email from your system.  

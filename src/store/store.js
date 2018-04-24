@@ -10,7 +10,6 @@ export const store = new Vuex.Store({
   state: {
     pageTitle: 'Keep Reading',
     sidebar: true,
-    sidebarBackground:'linear-gradient(to top, #f84f4f,  #6c1630)',
     topnav: true,
     footer: true,
     user:{}
@@ -18,9 +17,6 @@ export const store = new Vuex.Store({
   mutations: {
     setSidebar (state, payload) {
       state.sidebar = payload
-    },
-    setSidebarBackground (state, payload) {
-      state.sidebarBackground = payload
     },
     setTopnav (state, payload) {
       state.topnav = payload
@@ -41,6 +37,7 @@ export const store = new Vuex.Store({
         $.notify("Registration successfull.")
         router.push('/home')
       }).catch((err)=>{
+        console.log(err)
         let status = 'danger'
         $.notify({message:err.message},{type:status})
       })
@@ -48,6 +45,9 @@ export const store = new Vuex.Store({
     userSignIn ({commit}, payload) {
       db.logIn(payload.username, payload.password)
       .then(response => {
+        this.state.sidebar=true
+        this.state.topnav=true
+        this.state.footer=true
         router.push('/home')
       })
       .catch(error => {
@@ -63,7 +63,8 @@ export const store = new Vuex.Store({
     },
     userSignOut ({commit}) {
       db.logOut()
-      router.replace('login')
+      this.user={}
+      router.push('/login')
     },
     setUser ({commit}, payload) {
       commit('setUser', payload)

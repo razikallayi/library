@@ -1,8 +1,9 @@
 <template>
 	<div class="card">
-		<div class="content">
-			<h1 class="lead">{{decodedMessage}}</h1>	
+		<div class="header">
+			<h3 class="text-center lead">{{decodedMessage}}</h3>
 		</div>
+		<div class="content"></div>
 	</div>
 </template>
 <script>
@@ -10,6 +11,12 @@ export default {
 	name: 'ErrorPage',
 	props: {
 		message:{default:'404! Page Not Found'},
+	},
+	mounted(){
+		this.$nextTick(function () {
+			// this.$store.dispatch('setSidebar', false)
+			this.$store.dispatch('setTopnav', false)
+		})
 	},
 	computed:{
 		decodedMessage(){

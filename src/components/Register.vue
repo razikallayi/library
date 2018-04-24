@@ -77,37 +77,16 @@ export default {
 			this.$store.dispatch('userSignUp', { 
 				username: this.username,
 				password: this.password,
-				metadata:{
-					metadata : {
-						first_name : this.first_name,
-						last_name : this.last_name,
-						email : this.email,
-						username : this.username,
-						phone : this.phone,
-						role : "reader",
-						active : false,
-						type:'user',
-					},
-				}
+				first_name : this.first_name,
+				last_name : this.last_name,
+				email : this.email,
+				username : this.username,
+				phone : this.phone,
+				role : "reader",
+				active : false,
+				type:'user',
 			})
 
-		},
-		registerUser(){
-			db.signUp(this.username, this.password, {
-				metadata : {
-					first_name : this.first_name,
-					last_name : this.last_name,
-					email : this.email,
-					phone : this.phone,
-				},
-			}).then((response)=> {
-				$.notify("Successfully Registered")
-				this.clearForm()
-				this.$router.push('books')
-			}).catch((err)=>{
-				let status = 'danger'
-				$.notify({message:err.message},{type:status})
-			})
 		},
 		clearForm(){
 			this.first_name='',

@@ -38,20 +38,28 @@
 
           <div class="form-group">
             <div class="col-md-6">
-            <input type="radio" id="reader" value="reader" v-model="user.role">
-            <label for="reader">Reader</label>
-          </div>
-          <div class="col-md-6">
-            <input type="radio" id="librarian" value="librarian" v-model="user.role">
-            <label for="librarian">Librarian</label>
-          </div>
+              <input type="radio" id="reader" value="reader" v-model="user.role">
+              <label for="reader">Reader</label>
+            </div>
+            <div class="col-md-6">
+              <input type="radio" id="librarian" value="librarian" v-model="user.role">
+              <label for="librarian">Librarian</label>
+            </div>
           </div>
 
           <div class="form-group col-xs-12">
             <input id="active" type="checkbox" v-model="user.active">
             <label for="active">Active</label>
           </div>
-          <button type="submit" class="btn btn-fill btn-wd btn-info">{{button}}</button>
+
+          <div class="row">
+            <div class=" col-xs-6">
+              <button type="submit" class="btn btn-fill btn-info">{{button}}</button>
+            </div>
+            <div class=" col-xs-6">
+              <button type="reset" class="btn btn-fill btn-warning" @click="clearForm()">Clear</button>
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -142,6 +150,7 @@ export default {
   mounted() {
     this.$nextTick(function () {
       this.getUsers ()
+      this.$store.state.pageTitle="Users"
     })
   },
   methods: {
@@ -161,7 +170,7 @@ export default {
           }
         })
       }).catch((error)=>{
-        $.notify({message:error.message},{type:'danger'})
+        // $.notify({message:error.message},{type:'danger'})
       })
     },
     addUser () {
@@ -195,8 +204,8 @@ export default {
       userData.name=user.username
       usersDB.put(userData).then((response)=> {
         $.notify("Success")
-        vue.getUsers()
         vue.clearForm()
+        vue.getUsers()
       }).catch((err)=>{
         let status = 'danger'
         $.notify({message:err.message},{type:status})
@@ -228,13 +237,13 @@ export default {
     editUser (id,index) {
       var vue =this
       return usersDB.get(id).then(function(doc){
-        console.log(doc)
         vue.user.first_name = doc.first_name
         vue.user.last_name = doc.last_name
         vue.user.email = doc.email
         vue.user.phone = doc.phone
         vue.user.username = doc.username
-        vue.user.role = doc.role
+        vue.user.role = doc.role?doc.role:'reader'
+        vue.user.roles = doc.roles
         vue.user.password = doc.password
         vue.user.active = doc.active
         vue.user._id = doc._id
@@ -253,7 +262,7 @@ export default {
         usersDB.createIndex({
           index: {fields: ['name']}
         }).then(function(){
-          query="(?i)"+query
+          query="^(?i)"+query
           usersDB.find({
             selector: {
               type: {

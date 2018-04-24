@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <side-bar v-if="sidebar" :menuItems="getMenuItems" :background="sidebarBackground"></side-bar>
+    <side-bar v-if="sidebar" :menuItems="getMenuItems"></side-bar>
     <div class="main-panel" :style="sidebar?'':{width:'100%'}">
       <top-nav v-if="topnav" 
       :menuItems="getMenuItems"
@@ -44,9 +44,6 @@ export default {
     sidebar () {
       return this.$store.state.sidebar
     },
-    sidebarBackground () {
-      return this.$store.state.sidebarBackground
-    },
     topnav () {
       return this.$store.state.topnav
     },
@@ -56,25 +53,7 @@ export default {
     pageTitle () {
       return this.$store.state.pageTitle
     },
-    isAuthenticated () {
-      return this.$store.getters.isAuthenticated
-    },
-    menuItems () {
-      if (this.isAuthenticated) {
-        return [
-        { title: 'Home', path: '/home', icon: 'ti-home' },
-        { title: 'Books', path: '/books', icon: 'ti-book' },
-        { title: 'Users', path: '/users', icon: 'ti-user' },
-        { title: 'Logout', path: '/logout', icon: 'ti-lock' },
-        ]
-      } else {
-        return [
-        { title: 'Login', path: '/login', icon: 'ti-key' },
-        { title: 'Register', path: '/register', icon: 'ti-user' },
-        ]
-      }
-    },
-     getMenuItems () {
+    getMenuItems () {
       const requiresAuth = this.$router.app._route.matched.some(record => record.meta.requiresAuth)
       var vue= this
       var menuItems=[];
@@ -103,13 +82,13 @@ export default {
           menuItems = vue.noAuthMenuItems;
         }
       }
-        $.ajax(ajaxData)
-      }else{
-        menuItems = vue.noAuthMenuItems;
-      }
-      return menuItems
+      $.ajax(ajaxData)
+    }else{
+      menuItems = vue.noAuthMenuItems;
     }
-  },
-  name: 'App'
+    return menuItems
+  }
+},
+name: 'App'
 }
 </script>
