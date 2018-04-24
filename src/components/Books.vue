@@ -14,7 +14,7 @@
 
           <div class="form-group">
             <label>ISBN</label>
-            <input v-model="book.isbn" placeholder="ISBN" class="form-control border-input">
+            <input type="number" v-model="book.isbn" placeholder="ISBN" class="form-control border-input">
           </div>
 
           <div class="form-group">
@@ -73,14 +73,12 @@
             </tr>
             <tr v-for="(book,index) in books" :key="book._id">
               <td>{{index+1}}</td>
-              <td>{{book.name}}</td>
+              <td><router-link :to="'/book/'+book._id">{{book.name}}</router-link></td>
               <td>{{book.isbn}}</td>
               <td>{{book.category}}</td>
               <td>{{book.author}}</td>
               <td>{{book.published_date}}</td>
               <td>
-                <button class="btn btn-primary btn-xs" v-on:click="viewDetails(book._id,index)">
-                  <i class="ti-eye"></i>
                 </button>
                 <button class="btn btn-warning btn-xs" v-on:click="editBook(book._id,index)">
                   <i class="ti-pencil"></i>
@@ -201,9 +199,6 @@ export default {
       this.button = "Add Book"
       document.getElementById('BookNameInput').focus()
     },
-    viewDetails(bookId){
-      this.$router.push({ name: 'book_details', params: { id: bookId }})
-    },
     editBook (id,index) {
       var vue =this
       return db.get(id).then(function(doc){
@@ -272,6 +267,7 @@ export default {
         vue.clearForm()
         db.remove(result)
         vue.books.splice(index,1)
+        $.notify({message:"Deleted"},{type:'success'})
         return result
       }).catch(function(err){
         console.log(err);

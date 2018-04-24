@@ -46,22 +46,16 @@ export default {
 			var vue = this
 			db.get(this.checkout._id).then(function (doc) {
 				doc.approved = true
-				return db.put(doc).then(function (argument) {
-					vue.$emit('bookStatusChanged')
-				}).catch((e)=>{
-					console.log(e)
-				})
+				vue.$emit('bookStatusChanged')
+				return db.put(doc)
 			}).catch((e)=>{
 				console.log(e)
 			})
 		}, deleteCheckout () {
 			var vue = this
 			db.get(this.checkout._id).then(function (doc) {
-				return db.remove(doc).then(function (argument) {
-					vue.$emit('bookStatusChanged')
-				}).catch((e)=>{
-					console.log(e)
-				})
+				vue.$emit('bookStatusChanged')
+				return db.remove(doc)
 			}).catch((e)=>{console.log(e)})
 		},
 		viewDetails(){

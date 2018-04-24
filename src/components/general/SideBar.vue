@@ -15,15 +15,6 @@
                         <p>{{menuItem.title}}</p>
                     </router-link>
                 </li>
-               <!--  <li>
-                    <router-link to="/home"><i class="ti-home"></i>Home</router-link>
-                </li>
-                <li>
-                    <router-link to="/books"  active-class="active" ><i class="ti-book"></i>Books</router-link>
-                </li>
-                <li>
-                    <router-link to="/users"><i class="ti-user"></i>User</router-link>
-                </li> -->
             </ul>
         </div>
     </div>
@@ -43,8 +34,8 @@ export default{
             if(this.$store.state.user.role ==='reader')
                 return 'linear-gradient(to top, #4feef8, #33166c)'
             if(this.$store.state.user.role ==='librarian')
-                return 'linear-gradient(to top, #f8844f, #6c165a)'
-            return 'linear-gradient(to top, #f84f4f,  #6c1630)'
+                return 'linear-gradient(to top, #e6a32b, #710444)'
+            return 'linear-gradient(to top, #f86048, #5a0d25)'
         }
     },
 

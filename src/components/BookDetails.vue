@@ -19,8 +19,9 @@
 					<h4 class="title">{{book.name}}</h4>
 					<p class="category">{{book.author}}</p>
 				</div>
-				<div v-if="$store.state.user.role ==='reader' " class="col-md-4">
-					<button class="btn btn-lg btn-block btn-fill btn-wd" :class="checkoutButton.type" @click="checkoutButton.click">{{checkoutButton.name}}</button>
+				<div v-if="this.$store.state.user.role ==='reader' " class="col-md-4">
+					<button class="btn btn-lg btn-block btn-fill btn-wd" :class="checkoutButton.type" 
+					@click="checkoutButton.click">{{checkoutButton.name}}</button>
 				</div>
 			</div>
 		</div>
@@ -183,8 +184,10 @@ export default {
 			})
 		},
 		saveCheckout(checkout){
-			var bookNoComments = this.book;
+			var bookNoComments = Object.assign({}, this.book);
 			delete bookNoComments.comments
+
+
 			let checkoutItem={
 				_id: this.$store.state.user.name+"-"+this.id,
 				user : this.$store.state.user.name,
