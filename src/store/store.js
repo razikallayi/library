@@ -54,10 +54,10 @@ export const store = new Vuex.Store({
         let status='danger'
         if (error.name === 'unauthorized' || error.name === 'forbidden') {
           let message = "Incorrect username or password";
-          $.notify({message:message},{type:status})
+          $.notify({message:err.message},{type:status})
         } else {
           let message = error;
-          $.notify({message:message},{type:status})
+          $.notify({message:err.message},{type:status})
         }
       })
     },
