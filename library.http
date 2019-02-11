@@ -1,0 +1,76 @@
+GET http://admin:1234@localhost:5984/_session"
+###
+POST http://admin:1234@localhost:5984/_users/org.couchdb.user%3Arazi
+
+{
+"username": "razi",
+"password": "1234",
+"first_name": "Mohammed",
+"last_name": "Razi",
+"email": "razi@hcg.com.qa",
+"phone": "44029999",
+"role": "reader",
+"roles": [
+    "reader"
+],
+"active": false,
+"type": "user",
+"name": "razi",
+"_id": "org.couchdb.user:razi"
+}
+
+###
+GET http://admin:1234@localhost:5984/_session
+###
+PUT http://admin:1234@localhost:5984/_users 
+
+{ "_id": "org.couchdb.user:reader1",
+"name": "reader1",
+"type": "user",
+"roles": [
+    "reader"
+],
+"password": "plaintext_password"
+}
+
+###
+PUT http://admin:1234@localhost:5984/_users 
+
+{
+"username": "razi",
+"password": "hcg-0001",
+"first_name": "Mohammed",
+"last_name": "razi",
+"email": "razikallayi@gmail.com",
+"phone": "123456",
+"role": "reader",
+"roles": [
+    "reader"
+],
+"active": false,
+"type": "user",
+"name": "razi",
+"_id": "org.couchdb.user:razi"
+}
+
+####
+
+POST http://admin:1234@localhost:5984/_users/org.couchdb.user:razi 
+
+{
+"username": "razi",
+"password": "1234",
+"first_name": "Mohammed",
+"last_name": "Razi",
+"email": "razi@hcg.com.qa",
+"phone": "44029999",
+"role": "reader",
+"active": false,
+"type": "user",
+"name": "razi",
+"_id": "org.couchdb.user:razi"
+}
+
+
+###
+GET http://admin:1234@localhost:5984/_users/_all_docs?include_docs=true

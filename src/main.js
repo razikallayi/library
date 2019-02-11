@@ -7,12 +7,12 @@ import router from './router'
 import PouchDB from 'pouchdb'
 import PouchDBFind from 'pouchdb-find'
 import PouchDBAuth from 'pouchdb-authentication'
-import {store} from  './store/store';
+import { store } from './store/store';
 
 PouchDB.plugin(PouchDBFind);
 PouchDB.plugin(PouchDBAuth);
-export const db = new PouchDB('http://139.59.82.18:5984/library',{skip_setup: true});
-export const usersDB = new PouchDB('http://139.59.82.18:5984/_users',{skip_setup: true});
+export const db = new PouchDB('http://127.0.0.1:5984/library', { skip_setup: true });
+export const usersDB = new PouchDB('http://127.0.0.1:5984/_users', { skip_setup: true });
 
 Vue.config.productionTip = false
 

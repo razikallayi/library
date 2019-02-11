@@ -13,22 +13,22 @@ export const store = new Vuex.Store({
     sidebar: true,
     topnav: true,
     footer: true,
-    user:{}
+    user: {}
   },
   mutations: {
-    setSidebar (state, payload) {
+    setSidebar(state, payload) {
       state.sidebar = payload
     },
-    setTopnav (state, payload) {
+    setTopnav(state, payload) {
       state.topnav = payload
     },
-    setUser (state, payload) {
+    setUser(state, payload) {
       state.user = payload
     },
   },
   actions: {
-    userSignUp ({commit}, payload) {
-      var userData = Object.assign({},payload)
+    userSignUp({ commit }, payload) {
+      var userData = Object.assign({}, payload)
       // userData.roles=[]
       // delete userData.password
       // delete userData.type
@@ -37,46 +37,46 @@ export const store = new Vuex.Store({
       // delete userData._id
       // db.signUp(payload.username, payload.password,{metadata:userData})
       usersDB.put(userData)
-      .then((response)=> {
-        $.notify("Registration successfull.")
-        router.push('/home')
-      }).catch((err)=>{
-        console.log(err)
-        let status = 'danger'
-        $.notify({message:err.message},{type:status})
-      })
+        .then((response) => {
+          $.notify("Registration successfull.")
+          router.push('/home')
+        }).catch((err) => {
+          console.log(err)
+          let status = 'danger'
+          $.notify({ message: err.message }, { type: status })
+        })
     },
-    userSignIn ({commit}, payload) {
+    userSignIn({ commit }, payload) {
       db.logIn(payload.username, payload.password)
-      .then(response => {
-        this.state.sidebar=true
-        this.state.topnav=true
-        this.state.footer=true
-        router.push('/home')
-      })
-      .catch(error => {
-        let status='danger'
-        if (error.name === 'unauthorized' || error.name === 'forbidden') {
-          let message = "Incorrect username or password";
-          $.notify({message:error.message},{type:status})
-        } else {
-          let message = error;
-          $.notify({message:error.message},{type:status})
-        }
-      })
+        .then(response => {
+          this.state.sidebar = true
+          this.state.topnav = true
+          this.state.footer = true
+          router.push('/home')
+        })
+        .catch(error => {
+          let status = 'danger'
+          if (error.name === 'unauthorized' || error.name === 'forbidden') {
+            let message = "Incorrect username or password";
+            $.notify({ message: error.message }, { type: status })
+          } else {
+            let message = error;
+            $.notify({ message: error.message }, { type: status })
+          }
+        })
     },
-    userSignOut ({commit}) {
+    userSignOut({ commit }) {
       db.logOut()
-      this.user={}
+      this.user = {}
       router.push('/login')
     },
-    setUser ({commit}, payload) {
+    setUser({ commit }, payload) {
       commit('setUser', payload)
     },
-    setSidebar ({commit}, payload) {
+    setSidebar({ commit }, payload) {
       commit('setSidebar', payload)
     },
-    setTopnav ({commit}, payload) {
+    setTopnav({ commit }, payload) {
       commit('setTopnav', payload)
     },
   },
