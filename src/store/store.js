@@ -48,6 +48,7 @@ export const store = new Vuex.Store({
     },
     userSignIn({ commit }, payload) {
       db.logIn(payload.username, payload.password)
+        // fetch(`https://${payload.username}:${payload.password}@library.smileupps.com/_session`)
         .then(response => {
           this.state.sidebar = true
           this.state.topnav = true
@@ -56,9 +57,10 @@ export const store = new Vuex.Store({
         })
         .catch(error => {
           let status = 'danger'
-          if (error.name === 'unauthorized' || error.name === 'forbidden') {
+          console.log(error)
+          if (error.name === 'unknown' || error.name === 'unauthorized' || error.name === 'forbidden') {
             let message = "Incorrect username or password";
-            $.notify({ message: error.message }, { type: status })
+            $.notify({ message: message }, { type: status })
           } else {
             let message = error;
             $.notify({ message: error.message }, { type: status })

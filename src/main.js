@@ -11,8 +11,12 @@ import { store } from './store/store';
 
 PouchDB.plugin(PouchDBFind);
 PouchDB.plugin(PouchDBAuth);
-export const db = new PouchDB('http://127.0.0.1:5984/library', { skip_setup: true });
-export const usersDB = new PouchDB('http://127.0.0.1:5984/_users', { skip_setup: true });
+// const baseUrl = 'http://127.0.0.1:5984'
+// const baseUrl = 'https://library.smileupps.com'
+// const baseUrl = 'https://6abf0a2a-f0d4-4418-9401-1a1db0e33f60-bluemix.cloudant.com'
+const baseUrl = 'https://6abf0a2a-f0d4-4418-9401-1a1db0e33f60-bluemix.cloudantnosqldb.appdomain.cloud/'
+export const db = new PouchDB(baseUrl + '/library', { skip_setup: true });
+export const usersDB = new PouchDB(baseUrl + '/_users', { skip_setup: true });
 
 Vue.config.productionTip = false
 

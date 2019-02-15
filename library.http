@@ -20,6 +20,20 @@ POST http://admin:1234@localhost:5984/_users/org.couchdb.user%3Arazi
 }
 
 ###
+OPTIONS  https://library.smileupps.com/_session
+
+###
+GET  https://admin:123456@library.smileupps.com/_session
+###
+POST https://library.smileupps.com/library/_index
+content-type: application/json
+###
+
+POST  https://library.smileupps.com/_session
+###
+
+GET https://admin:123456@library.smileupps.com/_session
+###
 GET http://admin:1234@localhost:5984/_session
 ###
 PUT http://admin:1234@localhost:5984/_users 
@@ -74,3 +88,10 @@ POST http://admin:1234@localhost:5984/_users/org.couchdb.user:razi
 
 ###
 GET http://admin:1234@localhost:5984/_users/_all_docs?include_docs=true
+
+
+###
+
+http://www.greenacorn-websolutions.com/couchdb/export-import-a-database-with-couchdb.php
+curl -X GET http://admin:1234@127.0.0.1:5984/library/_all_docs\?include_docs\=true > /Users/razikallayi/Desktop/library.json
+curl -X GET http://admin:1234@127.0.0.1:5984/_users/_all_docs\?include_docs\=true > /Users/razikallayi/Desktop/_users.json
