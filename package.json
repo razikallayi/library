@@ -12,7 +12,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "bootstrap": "^4.1.0",
+    "bootstrap": "^4.3.1",
     "popper.js": "^1.14.3",
     "pouchdb": "^6.4.3",
     "pouchdb-authentication": "^1.1.2",
